@@ -1,33 +1,40 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { HomePage } from "./home";
-import { RecipeSearchPage } from "./recipes";
-import { AddIngredientPage } from "./ingredients";
-import { ShoppingListPage } from "./shopping-list";
+import { SignInPage } from "./auth";
+import { CreateGroupPage, GroupePage, GroupsListPage } from "./groups";
+import { NotFoundPage } from "./NotFoundPage";
+import { NavBar } from "./Navigation";
 
 const routes = [
   {
     path: "/",
-    Component: HomePage,
+    Component: GroupsListPage,
     exact: true,
   },
   {
-    path: "/add-ingredient",
-    Component: AddIngredientPage,
+    path: "/groups/:id",
+    Component: GroupePage,
   },
   {
-    path: "/recipes",
-    Component: RecipeSearchPage,
-    exact: true,
+    path: "/sign-in",
+    Component: SignInPage,
   },
   {
-    path: "/shopping-list",
-    Component: ShoppingListPage,
+    path: "/create-group",
+    Component: CreateGroupPage,
+  },
+  {
+    path: "/create-group",
+    Component: CreateGroupPage,
+  },
+  {
+    Component: NotFoundPage,
   },
 ];
 
 export const Routes = () => (
   <Router>
+    <NavBar />
     <Switch>
       {routes.map((route, index) => (
         <Route key={index} path={route.path} exact={route.exact}>
